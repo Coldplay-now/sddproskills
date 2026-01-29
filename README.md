@@ -1,7 +1,7 @@
 # SDDPRO Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Skills](https://img.shields.io/badge/Skills-4%2F4-brightgreen.svg)](#skill-规划)
+[![Skills](https://img.shields.io/badge/Skills-6%2F6-brightgreen.svg)](#skill-规划)
 [![Platform](https://img.shields.io/badge/Platform-Cursor%20%7C%20Claude-purple.svg)](https://cursor.sh)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Coldplay-now/sddproskills/pulls)
 
@@ -27,6 +27,11 @@ flowchart LR
         F[🔀 DAG]
     end
     
+    subgraph 质量保障
+        T[🧪 Test Plan]
+        DP[📦 Deploy]
+    end
+    
     subgraph 执行阶段
         G[🤖 Multi-Agent]
         H[✅ Checkpoint]
@@ -41,6 +46,10 @@ flowchart LR
     E -->|task-planner| F
     F --> G
     G --> H
+    C -->|test-planner| T
+    C -->|deployer| DP
+    T --> H
+    DP --> I
     H --> I
     
     style A fill:#fff,stroke:#333
@@ -60,6 +69,8 @@ flowchart LR
 | **spec-designer** | ✅ 已完成 | PRD | Tech Spec | 技术规格文档设计器 |
 | **ui-designer** | ✅ 已完成 | PRD | UI 设计规范 | UI/UX 设计器 |
 | **task-planner** | ✅ 已完成 | PRD + Spec + UI | Task DAG | 任务规划和编排器 |
+| **test-planner** | ✅ 已完成 | PRD + Spec + TASKS | TEST-PLAN.md | 测试计划设计器 |
+| **deployer** | ✅ 已完成 | Spec | 部署配置 | CI/CD 部署方案设计器 |
 
 ## 什么是 Skill？
 
