@@ -1,7 +1,7 @@
 # SDDPRO Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Skills](https://img.shields.io/badge/Skills-1-green.svg)](#已有-skills)
+[![Skills](https://img.shields.io/badge/Skills-1%2F4-green.svg)](#skill-规划)
 [![Platform](https://img.shields.io/badge/Platform-Cursor%20%7C%20Claude-purple.svg)](https://cursor.sh)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Coldplay-now/sddproskills/pulls)
 
@@ -9,7 +9,57 @@
 > 
 > 以 PRD 和技术规格文档为核心驱动，通过 AI Agent 实现高效、可追溯的软件开发流程。
 
-个人开发的 Cursor/Claude Agent Skills 集合，用于扩展 AI 编程助手的能力。
+这是一套完整的 SDD 工具链 Skills 集合，覆盖从需求设计到代码实现的全流程。
+
+## SDD 工具链全景
+
+```mermaid
+flowchart LR
+    subgraph 设计阶段
+        A[💡 需求想法]
+        B[📄 PRD]
+        C[📐 Tech Spec]
+        D[🎨 UI Design]
+    end
+    
+    subgraph 规划阶段
+        E[📋 Task Plan]
+        F[🔀 DAG]
+    end
+    
+    subgraph 执行阶段
+        G[🤖 Multi-Agent]
+        H[✅ Checkpoint]
+        I[🚀 Product]
+    end
+    
+    A -->|prd-designer| B
+    B -->|spec-designer| C
+    B -->|ui-designer| D
+    C --> E
+    D --> E
+    E -->|task-planner| F
+    F --> G
+    G --> H
+    H --> I
+    
+    style A fill:#fff,stroke:#333
+    style B fill:#ffd,stroke:#333
+    style C fill:#ffd,stroke:#333
+    style D fill:#ffd,stroke:#333
+    style E fill:#ddf,stroke:#333
+    style F fill:#ddf,stroke:#333
+    style I fill:#bfb,stroke:#333
+```
+
+## Skill 规划
+
+| Skill | 状态 | 输入 | 输出 | 说明 |
+|-------|------|------|------|------|
+| **prd-designer** | 🔜 计划中 | 需求想法 | PRD 文档 | 产品需求文档设计器 |
+| **spec-designer** | 🔜 计划中 | PRD | Tech Spec | 技术规格文档设计器 |
+| **ui-designer** | 🔜 计划中 | PRD | UI 设计稿 | UI/UX 设计器 |
+| **task-planner** | ✅ 已完成 | PRD + Spec + UI | Task DAG | 任务规划和编排器 |
 
 ## 什么是 Skill？
 
@@ -34,22 +84,27 @@ graph LR
 - **scripts/** — 辅助脚本，提供确定性的自动化能力
 - **test/** — 示例和测试用例（可选）
 
-## 已有 Skills
+---
 
-### 📋 task-planner
+## 📋 task-planner
 
-**项目规划和任务编排工具** — 基于 SDD 理念的核心 Skill
+**项目规划和任务编排工具** — SDD 工具链的执行核心
 
-根据 PRD 和技术 Spec 文档，通过引导式问答帮助制定开发计划：
+### 功能概述
+
+根据 PRD、技术 Spec 和 UI 设计文档，通过引导式问答帮助制定开发计划，支持多 Agent 并行开发。
+
+### 依赖文档
 
 ```mermaid
 flowchart TD
-    subgraph 输入
-        PRD[📄 PRD 文档]
-        Spec[📄 技术 Spec]
+    subgraph 输入文档
+        PRD[📄 PRD<br/>产品需求文档]
+        Spec[📐 Tech Spec<br/>技术规格文档]
+        UI[🎨 UI Design<br/>UI 设计稿<br/>可选]
     end
     
-    subgraph 规划流程
+    subgraph task-planner
         A[确认输入] --> B[模块识别]
         B --> C[依赖分析]
         C --> D[任务拆解]
@@ -57,42 +112,61 @@ flowchart TD
         E --> F[生成 DAG]
     end
     
-    subgraph 执行循环
-        G[获取可执行任务] --> H[并行执行]
-        H --> I[检查点验证]
-        I --> J{有问题?}
-        J -->|是| K[动态调整]
-        K --> G
-        J -->|否| L{完成?}
-        L -->|否| G
-        L -->|是| M[✅ 完成]
+    subgraph 输出
+        TASKS[📋 TASKS.md<br/>任务计划文档]
+        DAG[🔀 任务 DAG<br/>依赖拓扑图]
     end
     
     PRD --> A
     Spec --> A
-    F --> G
+    UI -.-> A
+    F --> TASKS
+    F --> DAG
     
     style PRD fill:#ffd,stroke:#333
     style Spec fill:#ffd,stroke:#333
-    style M fill:#bfb,stroke:#333
+    style UI fill:#ffe,stroke:#999,stroke-dasharray: 5 5
+    style TASKS fill:#dfd,stroke:#333
+    style DAG fill:#dfd,stroke:#333
 ```
 
-#### 核心特性
+### 执行流程
+
+```mermaid
+flowchart TD
+    subgraph 执行循环
+        G[获取可执行任务<br/>next_task.py] --> H[认领任务<br/>claim_task.py]
+        H --> I[并行执行<br/>最多 4 Agent]
+        I --> J[完成任务<br/>complete_task.py]
+        J --> K[检查点验证<br/>checkpoint.py]
+        K --> L{有问题?}
+        L -->|是| M[动态调整<br/>replan.py]
+        M --> G
+        L -->|否| N{全部完成?}
+        N -->|否| G
+        N -->|是| O[✅ 项目完成]
+    end
+    
+    style O fill:#bfb,stroke:#333
+```
+
+### 核心特性
 
 | 特性 | 说明 |
 |------|------|
 | 📝 引导式问答 | 6 阶段流程，逐步确认需求 |
-| 🔀 DAG 生成 | 自动分析依赖，生成任务拓扑图 |
-| 🚀 多 Agent 并行 | 支持最多 4 个 Agent 并行开发 |
-| ✅ 检查点机制 | 每轮执行后验证产出 |
-| 🔄 动态调整 | 失败时自动插入修复任务 |
+| 🔀 DAG 生成 | 自动分析依赖，生成 Mermaid + 文本双格式 |
+| 🤖 多 Agent 并行 | 支持最多 4 个 Agent 并行开发 |
+| ✅ 检查点机制 | 每轮执行后验证产出物和代码质量 |
+| 🔄 动态调整 | 失败时自动插入修复任务，重排优先级 |
+| 📊 进度追踪 | 实时任务状态和执行者追踪 |
 
-#### 目录结构
+### 目录结构
 
 ```
 taskplanner/
-├── SKILL.md              # 主文件
-├── scripts/              # 辅助脚本
+├── SKILL.md              # 主文件（272 行）
+├── scripts/              # 辅助脚本（7 个）
 │   ├── validate_dag.py   # DAG 验证
 │   ├── next_task.py      # 获取可执行任务
 │   ├── claim_task.py     # 认领任务
@@ -100,29 +174,31 @@ taskplanner/
 │   ├── reset_task.py     # 重置任务
 │   ├── checkpoint.py     # 检查点验证
 │   └── replan.py         # 动态调整
-└── test/                 # 示例项目
+└── test/                 # 示例项目（TaskFlow）
     ├── PRD.md            # 示例产品文档
     ├── Spec.md           # 示例技术规格
-    ├── TASKS.md          # 生成的任务计划
+    ├── TASKS.md          # 生成的任务计划（20 任务）
     ├── backend/          # 生成的后端代码
     └── frontend/         # 生成的前端代码
 ```
 
-#### 脚本说明
+### 脚本说明
 
 | 脚本 | 功能 | 用法 |
 |------|------|------|
-| `validate_dag.py` | 验证任务 DAG 无循环依赖 | `python validate_dag.py TASKS.md` |
-| `next_task.py` | 获取当前可执行的任务列表 | `python next_task.py TASKS.md` |
-| `claim_task.py` | 认领任务，自动生成会话 ID | `python claim_task.py TASKS.md TASK-001` |
+| `validate_dag.py` | 验证任务 DAG 无循环依赖、无孤立任务 | `python validate_dag.py TASKS.md` |
+| `next_task.py` | 获取当前可执行的任务列表（依赖已完成） | `python next_task.py TASKS.md` |
+| `claim_task.py` | 认领任务，自动生成会话 ID 并更新状态 | `python claim_task.py TASKS.md TASK-001` |
 | `complete_task.py` | 标记任务完成或失败 | `python complete_task.py TASKS.md TASK-001 [--failed]` |
-| `reset_task.py` | 重置任务为 pending 状态 | `python reset_task.py TASKS.md TASK-001` |
-| `checkpoint.py` | 执行检查点，验证产出物 | `python checkpoint.py TASKS.md <项目目录>` |
-| `replan.py` | 动态调整任务计划 | `python replan.py TASKS.md --suggest` |
+| `reset_task.py` | 重置任务为 pending 状态（用于重试） | `python reset_task.py TASKS.md TASK-001` |
+| `checkpoint.py` | 执行检查点：验证产出物、代码检查、建议调整 | `python checkpoint.py TASKS.md <项目目录>` |
+| `replan.py` | 动态调整：插入修复任务、重排优先级 | `python replan.py TASKS.md --suggest` |
 
-#### 触发词
+### 触发词
 
-`项目规划` · `任务拆解` · `开发计划` · `PRD 分析` · `模块依赖`
+`项目规划` · `任务拆解` · `开发计划` · `PRD 分析` · `模块依赖` · `任务编排`
+
+---
 
 ## 安装使用
 
