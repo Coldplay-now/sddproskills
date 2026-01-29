@@ -1,7 +1,7 @@
 # SDDPRO Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Skills](https://img.shields.io/badge/Skills-1%2F4-green.svg)](#skill-规划)
+[![Skills](https://img.shields.io/badge/Skills-2%2F4-green.svg)](#skill-规划)
 [![Platform](https://img.shields.io/badge/Platform-Cursor%20%7C%20Claude-purple.svg)](https://cursor.sh)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Coldplay-now/sddproskills/pulls)
 
@@ -56,7 +56,7 @@ flowchart LR
 
 | Skill | 状态 | 输入 | 输出 | 说明 |
 |-------|------|------|------|------|
-| **prd-designer** | 🔜 计划中 | 需求想法 | PRD 文档 | 产品需求文档设计器 |
+| **prd-designer** | ✅ 已完成 | 需求想法 | PRD 文档 | 产品需求文档设计器 |
 | **spec-designer** | 🔜 计划中 | PRD | Tech Spec | 技术规格文档设计器 |
 | **ui-designer** | 🔜 计划中 | PRD | UI 设计稿 | UI/UX 设计器 |
 | **task-planner** | ✅ 已完成 | PRD + Spec + UI | Task DAG | 任务规划和编排器 |
