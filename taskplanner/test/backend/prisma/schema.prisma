@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - stores user account information
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  name         String   @db.VarChar(100)
+  avatarUrl    String?  @map("avatar_url") @db.VarChar(500)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  ownedTeams   Team[]       @relation("TeamOwner")
+  teamMembers  TeamMember[]
+  createdTasks Task[]       @relation("TaskCreator")
+  assignedTasks Task[]      @relation("TaskAssignee")
+  comments     Comment[]
+
+  @@map("users")
+}
+
+// Team model - stores team information
+model Team {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(100)
+  ownerId   String   @map("owner_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  owner  User         @relation("TeamOwner", fields: [ownerId], references: [id])
+  members TeamMember[]
+  tasks  Task[]
+  tags   Tag[]
+
+  @@map("teams")
+}
+
+// TeamMember model - stores team membership information
+model TeamMember {
+  teamId   String   @map("team_id") @db.Uuid
+  userId   String   @map("user_id") @db.Uuid
+  role     String   @default("member") @db.VarChar(20)
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  // Relations
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([teamId, userId])
+  @@map("team_members")
+}
+
+// Task model - stores task information
+model Task {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String    @db.VarChar(255)
+  description String?   @db.Text
+  status      String    @default("pending") @db.VarChar(20)
+  priority    String    @default("medium") @db.VarChar(10)
+  dueDate     DateTime? @map("due_date") @db.Timestamp
+  creatorId   String    @map("creator_id") @db.Uuid
+  assigneeId  String?   @map("assignee_id") @db.Uuid
+  teamId      String?   @map("team_id") @db.Uuid
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  creator  User      @relation("TaskCreator", fields: [creatorId], references: [id])
+  assignee User?     @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  team     Team?     @relation(fields: [teamId], references: [id])
+  tags     TaskTag[]
+  comments Comment[]
+
+  @@map("tasks")
+}
+
+// Tag model - stores tag information
+model Tag {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(50)
+  color     String?  @db.VarChar(7)
+  teamId    String?  @map("team_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  // Relations
+  team     Team?     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  taskTags TaskTag[]
+
+  @@map("tags")
+}
+
+// TaskTag model - stores task-tag relationships
+model TaskTag {
+  taskId String @map("task_id") @db.Uuid
+  tagId  String @map("tag_id") @db.Uuid
+
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, tagId])
+  @@map("task_tags")
+}
+
+// Comment model - stores comment information
+model Comment {
+  id        String   @id @default(uuid()) @db.Uuid
+  taskId    String   @map("task_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
