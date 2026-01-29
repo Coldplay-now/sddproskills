@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* 深色主题（默认） */
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
@@ -21,6 +22,25 @@
             --border: #334155;
             --success: #10b981;
             --warning: #f59e0b;
+            --header-bg: rgba(15, 23, 42, 0.9);
+            --code-bg: #0d1117;
+        }
+
+        /* 米色/浅色主题 */
+        [data-theme="light"] {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --bg: #faf8f5;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f5f3f0;
+            --text: #1a1a1a;
+            --text-muted: #666666;
+            --border: #e5e2dd;
+            --success: #059669;
+            --warning: #d97706;
+            --header-bg: rgba(250, 248, 245, 0.95);
+            --code-bg: #f5f3f0;
         }
 
         * {
@@ -48,7 +68,7 @@
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: rgba(15, 23, 42, 0.9);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             z-index: 100;
         }
@@ -403,7 +423,7 @@
 
         /* Install */
         .install-code {
-            background: #0d1117;
+            background: var(--code-bg);
             border-radius: 12px;
             padding: 24px;
             font-family: 'JetBrains Mono', monospace;
@@ -413,11 +433,45 @@
         }
 
         .install-code .comment {
-            color: #6e7681;
+            color: var(--text-muted);
         }
 
         .install-code .command {
             color: var(--success);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: all 0.2s;
+            margin-left: 12px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .theme-toggle .icon {
+            font-size: 1.1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Smooth transition for theme change */
+        body, header, .skill-card, .value-card, .workflow, .pain-points, .install-code {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         /* Footer */
@@ -471,12 +525,18 @@
                 <a href="#install">安装</a>
                 <a href="#usage">使用</a>
             </nav>
-            <a href="https://github.com/Coldplay-now/sddproskills" class="github-btn" target="_blank">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-            </a>
+            <div class="header-actions">
+                <a href="https://github.com/Coldplay-now/sddproskills" class="github-btn" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">
+                    <span class="icon" id="theme-icon">🌙</span>
+                    <span id="theme-text">深色</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -852,5 +912,40 @@
             </p>
         </div>
     </footer>
+    <script>
+        // 主题切换功能
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton(newTheme);
+        }
+
+        function updateThemeButton(theme) {
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            
+            if (theme === 'light') {
+                icon.textContent = '☀️';
+                text.textContent = '米色';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = '深色';
+            }
+        }
+
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeButton(savedTheme);
+        }
+
+        // 页面加载时初始化
+        initTheme();
+    </script>
 </body>
 </html>
