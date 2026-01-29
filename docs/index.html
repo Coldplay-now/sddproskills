@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -533,8 +533,8 @@
                     GitHub
                 </a>
                 <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">
-                    <span class="icon" id="theme-icon">🌙</span>
-                    <span id="theme-text">深色</span>
+                    <span class="icon" id="theme-icon">☀️</span>
+                    <span id="theme-text">米色</span>
                 </button>
             </div>
         </div>
@@ -939,7 +939,7 @@
 
         // 初始化主题
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateThemeButton(savedTheme);
         }
