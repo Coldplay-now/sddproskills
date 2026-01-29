@@ -469,6 +469,7 @@
                 <a href="#skills">Skills</a>
                 <a href="#values">价值</a>
                 <a href="#install">安装</a>
+                <a href="#usage">使用</a>
             </nav>
             <a href="https://github.com/Coldplay-now/sddproskills" class="github-btn" target="_blank">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -716,16 +717,99 @@
                 <div class="install-code">
                     <p class="comment"># 方式一：个人 Skill（推荐，全局可用）</p>
                     <p class="command">git clone https://github.com/Coldplay-now/sddproskills.git</p>
-                    <p class="command">cp -r sddproskills/taskplanner ~/.cursor/skills/task-planner</p>
                     <p class="command">cp -r sddproskills/prddesigner ~/.cursor/skills/prd-designer</p>
                     <p class="command">cp -r sddproskills/specdesigner ~/.cursor/skills/spec-designer</p>
                     <p class="command">cp -r sddproskills/uidesigner ~/.cursor/skills/ui-designer</p>
+                    <p class="command">cp -r sddproskills/taskplanner ~/.cursor/skills/task-planner</p>
                     <p class="command">cp -r sddproskills/testplanner ~/.cursor/skills/test-planner</p>
                     <p class="command">cp -r sddproskills/deployer ~/.cursor/skills/deployer</p>
                     <br>
                     <p class="comment"># 方式二：项目 Skill（仅当前项目可用）</p>
                     <p class="command">mkdir -p .cursor/skills</p>
                     <p class="command">cp -r sddproskills/* .cursor/skills/</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage -->
+        <section id="usage">
+            <div class="container">
+                <div class="section-title">
+                    <h2>如何使用</h2>
+                    <p>在 Cursor 对话中直接提及关键词，自动触发对应 Skill</p>
+                </div>
+                <div class="pain-points">
+                    <table class="pain-table">
+                        <thead>
+                            <tr>
+                                <th>Skill</th>
+                                <th>触发关键词示例</th>
+                                <th>输出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>prd-designer</strong></td>
+                                <td>"帮我写 PRD"、"设计产品需求"、"我有个产品想法"</td>
+                                <td>PRD.md</td>
+                            </tr>
+                            <tr>
+                                <td><strong>spec-designer</strong></td>
+                                <td>"写技术规格"、"设计技术方案"、"Tech Spec"</td>
+                                <td>Spec.md</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ui-designer</strong></td>
+                                <td>"设计 UI"、"界面设计"、"UI 规范"</td>
+                                <td>UI-Design.md</td>
+                            </tr>
+                            <tr>
+                                <td><strong>task-planner</strong></td>
+                                <td>"项目规划"、"任务拆解"、"开发计划"</td>
+                                <td>TASKS.md</td>
+                            </tr>
+                            <tr>
+                                <td><strong>test-planner</strong></td>
+                                <td>"测试计划"、"测试用例"、"QA 策略"</td>
+                                <td>TEST-PLAN.md</td>
+                            </tr>
+                            <tr>
+                                <td><strong>deployer</strong></td>
+                                <td>"配置部署"、"CI/CD"、"Docker 部署"</td>
+                                <td>deploy/</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dialog Examples -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>典型对话示例</h2>
+                    <p>按顺序使用 Skills 完成一个完整项目</p>
+                </div>
+                <div class="workflow">
+                    <div class="install-code" style="text-align: left;">
+                        <p class="comment"># 1️⃣ 开始新项目</p>
+                        <p style="color: var(--text);">你：我想做一个在线协作待办清单应用，帮我写 PRD</p>
+                        <br>
+                        <p class="comment"># 2️⃣ 技术设计</p>
+                        <p style="color: var(--text);">你：根据 @PRD.md 帮我写技术规格</p>
+                        <br>
+                        <p class="comment"># 3️⃣ UI 设计</p>
+                        <p style="color: var(--text);">你：根据 PRD 帮我设计 UI 规范</p>
+                        <br>
+                        <p class="comment"># 4️⃣ 任务规划</p>
+                        <p style="color: var(--text);">你：根据 @PRD.md @Spec.md 帮我做项目规划</p>
+                        <br>
+                        <p class="comment"># 5️⃣ 开始开发</p>
+                        <p style="color: var(--text);">你：根据 TASKS.md 开始执行开发任务</p>
+                        <br>
+                        <p class="comment" style="color: var(--warning);">💡 提示：使用 @文件名 可以让 Cursor 读取特定文件作为上下文</p>
+                    </div>
                 </div>
             </div>
         </section>

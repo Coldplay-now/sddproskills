@@ -275,23 +275,83 @@ taskplanner/
 
 ## 安装使用
 
-### 方式一：个人 Skill（推荐）
-
-将 skill 复制到 Cursor 个人 skills 目录：
+### 方式一：个人 Skill（推荐，全局可用）
 
 ```bash
-# 复制 task-planner skill
-cp -r taskplanner ~/.cursor/skills/task-planner
+git clone https://github.com/Coldplay-now/sddproskills.git
+cp -r sddproskills/prddesigner ~/.cursor/skills/prd-designer
+cp -r sddproskills/specdesigner ~/.cursor/skills/spec-designer
+cp -r sddproskills/uidesigner ~/.cursor/skills/ui-designer
+cp -r sddproskills/taskplanner ~/.cursor/skills/task-planner
+cp -r sddproskills/testplanner ~/.cursor/skills/test-planner
+cp -r sddproskills/deployer ~/.cursor/skills/deployer
 ```
 
-### 方式二：项目 Skill
-
-将 skill 复制到项目 `.cursor/skills/` 目录：
+### 方式二：项目 Skill（仅当前项目可用）
 
 ```bash
 mkdir -p .cursor/skills
-cp -r taskplanner .cursor/skills/task-planner
+cp -r sddproskills/* .cursor/skills/
 ```
+
+---
+
+## 如何使用
+
+### 触发方式
+
+在 Cursor 对话中**直接提及相关关键词**，Agent 会自动匹配并加载对应的 Skill：
+
+| Skill | 触发关键词示例 |
+|-------|---------------|
+| **prd-designer** | "帮我写 PRD"、"设计产品需求"、"我有个产品想法" |
+| **spec-designer** | "写技术规格"、"设计技术方案"、"Tech Spec" |
+| **ui-designer** | "设计 UI"、"界面设计"、"UI 规范" |
+| **task-planner** | "项目规划"、"任务拆解"、"开发计划" |
+| **test-planner** | "测试计划"、"测试用例"、"QA 策略" |
+| **deployer** | "配置部署"、"CI/CD"、"Docker 部署" |
+
+### 推荐使用流程
+
+```mermaid
+flowchart LR
+    A[1⃣ PRD] --> B[2⃣ Spec]
+    A --> C[3⃣ UI]
+    B --> D[4⃣ Tasks]
+    C --> D
+    B --> E[5⃣ Test]
+    B --> F[6⃣ Deploy]
+    D --> G[开发执行]
+```
+
+### 典型对话示例
+
+**1️⃣ 开始新项目**
+```
+你：我想做一个在线协作待办清单应用，帮我写 PRD
+```
+
+**2️⃣ 技术设计**
+```
+你：根据 @PRD.md 帮我写技术规格
+```
+
+**3️⃣ UI 设计**
+```
+你：根据 PRD 帮我设计 UI 规范
+```
+
+**4️⃣ 任务规划**
+```
+你：根据 @PRD.md @Spec.md 帮我做项目规划
+```
+
+**5️⃣ 开始开发**
+```
+你：根据 TASKS.md 开始执行开发任务
+```
+
+> **提示**：使用 `@文件名` 可以让 Cursor 读取特定文件作为上下文
 
 ## Skill 开发规范
 
