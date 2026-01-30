@@ -544,13 +544,13 @@
         <!-- Hero -->
         <section class="hero">
             <div class="container">
-                <span class="badge">🚀 6 Skills · E2E 全栈覆盖 · 完整软件生命周期</span>
+                <span class="badge">🚀 7 Skills · E2E 全栈覆盖 · 完整软件生命周期</span>
                 <h1>
-                    <span class="highlight">6 个 Skills</span><br>
+                    <span class="highlight">7 个 Skills</span><br>
                     全栈 AI Coding 工具箱
                 </h1>
                 <p class="hero-desc">
-                    <strong>prd-designer · spec-designer · ui-designer · task-planner · test-planner · deployer</strong><br><br>
+                    <strong>prd-designer · spec-designer · ui-designer · task-planner · test-planner · deployer · notifier</strong><br><br>
                     一套完整的端到端 Skills 工具链，让个人开发者借助 AI Agent 实现<strong>规范化、高效率、高质量</strong>的软件开发。
                 </p>
                 <div class="hero-flow">
@@ -567,6 +567,8 @@
                     <span class="flow-item">🧪 Test</span>
                     <span class="flow-arrow">→</span>
                     <span class="flow-item">📦 Deploy</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-item">🔔 Notify</span>
                     <span class="flow-arrow">→</span>
                     <span class="flow-item">🚀 产品</span>
                 </div>
@@ -634,7 +636,7 @@
         <section id="skills">
             <div class="container">
                 <div class="section-title">
-                    <h2>6 个核心 Skills</h2>
+                    <h2>7 个核心 Skills</h2>
                     <p>覆盖软件开发全生命周期</p>
                 </div>
                 <div class="skills-grid">
@@ -692,6 +694,15 @@
                             <span>📤 deploy/</span>
                         </div>
                     </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🔔</div>
+                        <h3>notifier</h3>
+                        <p class="desc">代码提交后自动发送通知，支持邮件与 Telegram</p>
+                        <div class="skill-meta">
+                            <span>📥 Commit</span>
+                            <span>📤 通知消息</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -707,7 +718,7 @@
                     <div class="value-card">
                         <div class="value-icon">📐</div>
                         <h3>规范化</h3>
-                        <p>6 个 Skill 覆盖完整软件生命周期，每个阶段都有清晰的输入输出规范，告别想到哪写到哪的混乱</p>
+                        <p>7 个 Skill 覆盖完整软件生命周期，每个阶段都有清晰的输入输出规范，告别想到哪写到哪的混乱</p>
                     </div>
                     <div class="value-card">
                         <div class="value-icon">⚡</div>
@@ -762,6 +773,11 @@
                             <h4>质量保障</h4>
                             <p>test-planner<br>deployer</p>
                         </div>
+                        <div class="workflow-step">
+                            <div class="step-number">7</div>
+                            <h4>提交通知</h4>
+                            <p>notifier<br>提交提醒</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -783,6 +799,7 @@
                     <p class="command">cp -r sddproskills/taskplanner ~/.cursor/skills/task-planner</p>
                     <p class="command">cp -r sddproskills/testplanner ~/.cursor/skills/test-planner</p>
                     <p class="command">cp -r sddproskills/deployer ~/.cursor/skills/deployer</p>
+                    <p class="command">cp -r sddproskills/notifier ~/.cursor/skills/notifier</p>
                     <br>
                     <p class="comment"># 方式二：项目 Skill（仅当前项目可用）</p>
                     <p class="command">mkdir -p .cursor/skills</p>
@@ -838,6 +855,11 @@
                                 <td>"配置部署"、"CI/CD"、"Docker 部署"</td>
                                 <td>deploy/</td>
                             </tr>
+                        <tr>
+                            <td><strong>notifier</strong></td>
+                            <td>"提交通知"、"完成通知"、"邮件通知"、"Telegram 通知"</td>
+                            <td>通知消息</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

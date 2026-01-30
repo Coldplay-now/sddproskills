@@ -1,15 +1,15 @@
 # SDDPRO Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Skills](https://img.shields.io/badge/Skills-6%2F6-brightgreen.svg)](#skill-规划)
+[![Skills](https://img.shields.io/badge/Skills-7%2F7-brightgreen.svg)](#skill-规划)
 [![Platform](https://img.shields.io/badge/Platform-Cursor%20%7C%20Claude-purple.svg)](https://cursor.sh)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Coldplay-now/sddproskills/pulls)
 
 > **SDD** = **S**pec **D**riven **D**evelopment（规格驱动开发）
 
-## 🎯 6 Skills · E2E 全栈 AI Coding 工具箱
+## 🎯 7 Skills · E2E 全栈 AI Coding 工具箱
 
-**6 个专业 Skills，覆盖软件开发全生命周期：**
+**7 个专业 Skills，覆盖软件开发全生命周期：**
 
 | # | Skill | 功能 |
 |---|-------|------|
@@ -19,6 +19,7 @@
 | 4 | **task-planner** | 文档 → 任务 DAG |
 | 5 | **test-planner** | 规格 → 测试计划 |
 | 6 | **deployer** | 规格 → 部署配置 |
+| 7 | **notifier** | 代码提交 → 通知 |
 
 **一套完整的端到端 Skills 工具链**，让个人开发者借助 AI Agent 实现**规范化、高效率、高质量**的软件开发。
 
@@ -60,7 +61,7 @@ mindmap
 
 | 价值维度 | 具体体现 |
 |----------|----------|
-| **📐 规范化** | 6 个 Skill 覆盖完整软件生命周期，每个阶段都有清晰的输入输出规范 |
+| **📐 规范化** | 7 个 Skill 覆盖完整软件生命周期，每个阶段都有清晰的输入输出规范 |
 | **⚡ 高效率** | 任务 DAG 自动编排，支持 4 Agent 并行开发，脚本自动化减少重复工作 |
 | **✅ 高质量** | 检查点机制持续验证，测试计划完整覆盖，部署流程标准化 |
 
@@ -97,6 +98,7 @@ flowchart TD
     subgraph 执行阶段
         G[🤖 Multi-Agent]
         H[✅ Checkpoint]
+        N[🔔 Notify]
         I[🚀 Product]
     end
     
@@ -113,6 +115,8 @@ flowchart TD
     T --> H
     DP --> I
     H --> I
+    H -.->|notifier| N
+    N -.-> I
     
     style A fill:#fff,stroke:#333
     style B fill:#ffd,stroke:#333
@@ -133,6 +137,7 @@ flowchart TD
 | **task-planner** | ✅ 已完成 | PRD + Spec + UI | Task DAG | 任务规划和编排器 |
 | **test-planner** | ✅ 已完成 | PRD + Spec + TASKS | TEST-PLAN.md | 测试计划设计器 |
 | **deployer** | ✅ 已完成 | Spec | 部署配置 | CI/CD 部署方案设计器 |
+| **notifier** | ✅ 已完成 | 代码提交 | 通知消息 | 代码提交通知器 |
 
 ## 什么是 Skill？
 
@@ -285,6 +290,7 @@ cp -r sddproskills/uidesigner ~/.cursor/skills/ui-designer
 cp -r sddproskills/taskplanner ~/.cursor/skills/task-planner
 cp -r sddproskills/testplanner ~/.cursor/skills/test-planner
 cp -r sddproskills/deployer ~/.cursor/skills/deployer
+cp -r sddproskills/notifier ~/.cursor/skills/notifier
 ```
 
 ### 方式二：项目 Skill（仅当前项目可用）
@@ -310,6 +316,7 @@ cp -r sddproskills/* .cursor/skills/
 | **task-planner** | "项目规划"、"任务拆解"、"开发计划" |
 | **test-planner** | "测试计划"、"测试用例"、"QA 策略" |
 | **deployer** | "配置部署"、"CI/CD"、"Docker 部署" |
+| **notifier** | "提交通知"、"完成通知"、"邮件通知"、"Telegram 通知" |
 
 ### 推荐使用流程
 
@@ -321,7 +328,8 @@ flowchart LR
     C --> D
     B --> E[5⃣ Test]
     B --> F[6⃣ Deploy]
-    D --> G[开发执行]
+    F --> G[7⃣ Notify]
+    D --> H[开发执行]
 ```
 
 ### 典型对话示例
